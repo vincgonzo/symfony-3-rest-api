@@ -1,0 +1,14 @@
+services:
+    app.exception_subscriber:
+        class: AppBundle\EventSubscriber\ExceptionListener
+        arguments:
+            - '@jms_serializer'
+        tags:
+            - { name: kernel.event_subscriber }
+
+    app.normalizer.resource_validation_exception:
+        class: AppBundle\Normalizer\NotFoundHttpExceptionNormalizer
+        arguments:
+            - { type: 'Symfony\Component\HttpKernel\Exception\NotFoundHttpException'  }
+        tags:
+            - { name: app.normalizer }
